@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./styles/index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Picker</title>
+    
+  </head>
+<body>
+  <div class="root-container"> 
+    <div class="main-container">
+      <div class="header-container">
+        <div class="header">
+          <h2>Choose Your Colour</h2>
+        </div>
+        <div class="color-picker-container">
+          <button>
+            <h3>Pick Colour</h3>
+          </button>
+        </div>
+      </div>
+      <div class="content-container">
+        <div class="colour-picker">
+          <div class="color-canvas">
+            <canvas id="color-canvas"></canvas>
+          </div>
+          <div class="colour-slider" id="colour-slider"></div>
+          <div class="color-codes">
+            <h4 id="color-code-hex">#ffffff</h4>
+            <h4 id="color-code-rgb">rgb(0, 0, 0)</h4>
+          </div>
+          <div class="colour-preview" id="colour-preview"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="./scripts/index.js"></script>
+</body>
+</html>
