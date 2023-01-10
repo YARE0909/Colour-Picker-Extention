@@ -3,6 +3,8 @@ let ctx = c.getContext("2d");
 let colorPreview = document.getElementById("colour-preview");
 let colorCodeRGB = document.getElementById("color-code-rgb");
 let colorCodeHex = document.getElementById("color-code-hex");
+let colourDropperBtn = document.getElementById("colour-dropper");
+let rootContainer = document.getElementById("root")
 
 let colorSlider = document.getElementById("colour-slider");
 
@@ -15,6 +17,15 @@ function componentToHex(c) {
 function rgbToHex(r, g, b) {
   return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
+
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  }
 
 // Main colour picker
 let color = "#0000ff";
@@ -46,3 +57,21 @@ colorSlider.addEventListener("click", (e) => {
   let pixel = colorSlider.getImageData(x, y, 1, 1)["data"];
   color = rgbToHex(pixel[0], pixel[1], pixel[2]);
 });
+
+
+// Colour picker eye dropper
+colourDropperBtn.addEventListener("click", () => {
+    rootContainer.hidden = true;
+    const eyeDropper = new EyeDropper();
+    
+    eyeDropper.open().then((result) => {
+        colorCodeHex.innerText = result.sRGBHex;
+        let rgbCol = hexToRgb(result.sRGBHex);
+        let rgbFin = `rbg(${rgbCol.r}, ${rgbCol.g}, ${rgbCol.b})`;
+        rootContainer.hidden = false;
+        colorCodeRGB.innerText = rgbFin;
+        colorPreview.style.background = result.sRGBHex;
+    }).catch((err) => {
+        colorCodeHex.innerText = err;
+    })
+})
