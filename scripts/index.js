@@ -5,6 +5,8 @@ let colorCodeRGB = document.getElementById("color-code-rgb");
 let colorCodeHex = document.getElementById("color-code-hex");
 let colourDropperBtn = document.getElementById("colour-dropper");
 let rootContainer = document.getElementById("root");
+let puck = document.getElementById("puck")
+let puckSlider = document.getElementById("puck-slider")
 
 let colorSlider = document.getElementById("colour-slider");
 let sliderCtx = colorSlider.getContext("2d", { willReadFrequently: true });
@@ -68,27 +70,21 @@ c.addEventListener("click", (e) => {
   colorPreview.style.background = rgb;
   colorCodeRGB.innerText = rgb;
   colorCodeHex.innerText = rgbToHex(pixel[0], pixel[1], pixel[2]);
+  puck.style.left = `${x}px`;
+  puck.style.top = `${y}px`;
 });
 
 colorSlider.addEventListener("click", (e) => {
   let rect = colorSlider.getBoundingClientRect();
   let x = e.clientX - rect.left;
   let y = e.clientY - rect.top;
+
+
   let pixel = sliderCtx.getImageData(x, y, 1, 1)["data"];
   console.log(pixel);
-  let red = sliderCtx.getImageData(x, y, 1, 1).data[0];
-  let green = sliderCtx.getImageData(x, y, 1, 1).data[1];
-  let blue = sliderCtx.getImageData(x, y, 1, 1).data[2];
-  let alpha = sliderCtx.getImageData(x, y, 1, 1).data[3];
-  console.log(red);
-  console.log(green);
-  console.log(blue);
-  console.log(alpha);
-  // console.log(pixel[1]);
-  // console.log(pixel[2]);
   let color = rgbToHex(pixel[0], pixel[1], pixel[2]);
-  // console.log(color);
   createCanvas(color);
+  puckSlider.style.left = `${x}px`
 });
 
 // Colour picker eye dropper
