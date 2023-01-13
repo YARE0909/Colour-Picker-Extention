@@ -11,6 +11,42 @@ let puckSlider = document.getElementById("puck-slider")
 let colorSlider = document.getElementById("colour-slider");
 let sliderCtx = colorSlider.getContext("2d", { willReadFrequently: true });
 
+// Click to copy 
+
+colorCodeHex.onclick = () => {
+  document.execCommand("copy");
+}
+
+colorCodeHex.addEventListener("copy", (e) => {
+  e.preventDefault();
+  if (e.clipboardData) {
+    e.clipboardData.setData("text/plain", colorCodeHex.textContent);
+    console.log(e.clipboardData.getData("text"))
+  }
+})
+
+const updateColour = () => {
+  let xPos = puck.offsetLeft + 7;
+  let yPos = puck.offsetTop + 7;
+  let pixel = ctx.getImageData(xPos, yPos, 1, 1)["data"];
+  let rgb = `rgb(${pixel[0]},${pixel[1]},${pixel[2]})`;
+  colorPreview.style.background = rgb;
+  colorCodeRGB.innerText = rgb;
+  colorCodeHex.innerText = rgbToHex(pixel[0], pixel[1], pixel[2]);
+}
+
+colorCodeRGB.onclick = () => {
+  document.execCommand("copy");
+}
+
+colorCodeRGB.addEventListener("copy", (e) => {
+  e.preventDefault();
+  if (e.clipboardData) {
+    e.clipboardData.setData("text/plain", colorCodeRGB.textContent);
+    console.log(e.clipboardData.getData("text"))
+  }
+})
+
 // rgb to hex converter
 function componentToHex(c) {
   var hex = c.toString(16);
@@ -79,12 +115,11 @@ colorSlider.addEventListener("click", (e) => {
   let x = e.clientX - rect.left;
   let y = e.clientY - rect.top;
 
-
   let pixel = sliderCtx.getImageData(x, y, 1, 1)["data"];
-  console.log(pixel);
   let color = rgbToHex(pixel[0], pixel[1], pixel[2]);
   createCanvas(color);
   puckSlider.style.left = `${x}px`
+  updateColour();
 });
 
 // Colour picker eye dropper
