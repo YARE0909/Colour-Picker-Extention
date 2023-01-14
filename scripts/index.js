@@ -4,26 +4,86 @@ let colorPreview = document.getElementById("colour-preview");
 let colorCodeRGB = document.getElementById("color-code-rgb");
 let colorCodeHex = document.getElementById("color-code-hex");
 let colourDropperBtn = document.getElementById("colour-dropper");
+let saveColourBtn = document.getElementById("save-colour");
 let rootContainer = document.getElementById("root");
-let puck = document.getElementById("puck")
-let puckSlider = document.getElementById("puck-slider")
+let puck = document.getElementById("puck");
+let puckSlider = document.getElementById("puck-slider");
+let palletMain = document.getElementById("collapse");
+let collapseIcon = document.getElementById("collapse-icon");
 
 let colorSlider = document.getElementById("colour-slider");
 let sliderCtx = colorSlider.getContext("2d", { willReadFrequently: true });
 
-// Click to copy 
+// Saved pallets
+// localStorage.removeItem("savedCol")
+let savedCol = localStorage.getItem("savedCol");
+console.log(savedCol);
+
+const addPellet = () => {
+  if (!savedCol) {
+    localStorage.setItem("savedCol", "[]");
+  } else {
+    console.log("FULL");
+    let palletEle = localStorage.getItem("savedCol");
+    let parsedPalletEle = JSON.parse(palletEle);
+    parsedPalletEle.map((ele) => {
+      console.log(ele);
+      const pellet = document.createElement("div");
+      pellet.classList.add("pallet");
+      pellet.style.backgroundColor = ele;
+      const codeText = document.createElement("h6");
+      codeText.textContent += ele;
+      pellet.appendChild(codeText);
+      document.getElementById("pallet-grid-container").appendChild(pellet);
+    });
+  }
+};
+
+addPellet();
+
+// Save colour button
+
+const checkAddBtnStatus = () => {
+  let palletEle = localStorage.getItem("savedCol");
+  let parsedPalletEle = JSON.parse(palletEle);
+  if (parsedPalletEle.length == 9) {
+    saveColourBtn.style.backgroundColor = "#04c45e8a";
+    saveColourBtn.style.cursor = "default";
+  }
+};
+
+checkAddBtnStatus();
+
+saveColourBtn.addEventListener("click", () => {
+  let palletEle = localStorage.getItem("savedCol");
+  let parsedPalletEle = JSON.parse(palletEle);
+  if (parsedPalletEle.length < 9) {
+    parsedPalletEle.push(colorCodeHex.innerText);
+    localStorage.setItem("savedCol", JSON.stringify(parsedPalletEle));
+    const pellet = document.createElement("div");
+    pellet.classList.add("pallet");
+    pellet.style.backgroundColor = colorCodeHex.innerText;
+    const codeText = document.createElement("h6");
+    codeText.textContent += colorCodeHex.innerText;
+    pellet.appendChild(codeText);
+    document.getElementById("pallet-grid-container").appendChild(pellet);
+    checkAddBtnStatus();
+  }
+});
+
+// Click to copy
 
 colorCodeHex.onclick = () => {
   document.execCommand("copy");
-}
+};
 
 colorCodeHex.addEventListener("copy", (e) => {
   e.preventDefault();
   if (e.clipboardData) {
     e.clipboardData.setData("text/plain", colorCodeHex.textContent);
-    console.log(e.clipboardData.getData("text"))
+    console.log(e.clipboardData.getData("text"));
   }
-})
+});
 
 const updateColour = () => {
   let xPos = puck.offsetLeft + 7;
@@ -33,19 +93,19 @@ const updateColour = () => {
   colorPreview.style.background = rgb;
   colorCodeRGB.innerText = rgb;
   colorCodeHex.innerText = rgbToHex(pixel[0], pixel[1], pixel[2]);
-}
+};
 
 colorCodeRGB.onclick = () => {
   document.execCommand("copy");
-}
+};
 
 colorCodeRGB.addEventListener("copy", (e) => {
   e.preventDefault();
   if (e.clipboardData) {
     e.clipboardData.setData("text/plain", colorCodeRGB.textContent);
-    console.log(e.clipboardData.getData("text"))
+    console.log(e.clipboardData.getData("text"));
   }
-})
+});
 
 // rgb to hex converter
 function componentToHex(c) {
@@ -118,7 +178,7 @@ colorSlider.addEventListener("click", (e) => {
   let pixel = sliderCtx.getImageData(x, y, 1, 1)["data"];
   let color = rgbToHex(pixel[0], pixel[1], pixel[2]);
   createCanvas(color);
-  puckSlider.style.left = `${x}px`
+  puckSlider.style.left = `${x}px`;
   updateColour();
 });
 
@@ -140,4 +200,16 @@ colourDropperBtn.addEventListener("click", () => {
     .catch((err) => {
       colorCodeHex.innerText = err;
     });
+});
+
+let collapsed = true;
+
+collapseIcon.addEventListener("click", (e) => {
+  if (collapsed) {
+    palletMain.style.display = "block";
+    collapsed = !collapsed;
+  } else {
+    palletMain.style.display = "none";
+    collapsed = !collapsed;
+  }
 });

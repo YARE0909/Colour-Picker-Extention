@@ -1,46 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="./styles/index.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/index.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Color Picker</title>
-    
   </head>
-<body>
-  <div class="root-container" id="root"> 
-    <div class="main-container">
-      <div class="header-container">
-        <div class="header">
-          <img src="icon.png" alt="/" width="15">
-          <h2>ColoPick</h2>
+  <body>
+    <div class="root-container" id="root">
+      <div class="main-container">
+        <div class="header-container">
+          <div class="header">
+            <img src="icon.png" alt="/" width="15" />
+            <h2>ColoPick</h2>
+          </div>
+          <div class="color-picker-container" id="colour-dropper">
+            <button>
+              <h3>Pick Colour</h3>
+            </button>
+          </div>
         </div>
-        <div class="color-picker-container" id="colour-dropper">
-          <button>
-            <h3>Pick Colour</h3>
-          </button>
-        </div>
-      </div>
-      <div class="content-container">
-        <div class="colour-picker">
-          <div class="color-canvas-container">
-            <div class="puck" id="puck"></div>
-            <canvas id="color-canvas" width="358" height="200">
-            </canvas>
+        <div class="content-container">
+          <div class="colour-picker">
+            <div class="color-canvas-container">
+              <div class="puck" id="puck"></div>
+              <canvas id="color-canvas" width="358" height="200"> </canvas>
+            </div>
+            <div class="colour-slider">
+              <div class="puck-slider" id="puck-slider"></div>
+              <canvas id="colour-slider" width="358" height="10"></canvas>
+            </div>
+            <div class="color-codes">
+              <h4 id="color-code-hex">#ffffff</h4>
+              <h4 id="color-code-rgb">rgb(0, 0, 0)</h4>
+            </div>
+            <div class="colour-preview" id="colour-preview"></div>
+            <div class="pallet-main-container" id="pallet-main-container">
+              <div class="collapse-icon-container" id="collapse-icon-container">
+                <div class="collapse-icon" id="collapse-icon">
+                  <h5>...</h5>
+                </div>
+              </div>
+              <div class="collapse" id="collapse">
+                <div class="header-container">
+                  <div class="header">
+                    <h2>Saved Colours</h2>
+                  </div>
+                  <div class="color-picker-container">
+                    <button id="save-colour">
+                      <h3>Save Colour</h3>
+                    </button>
+                  </div>
+                </div>
+                <div class="pallet-container" id="pallet-container">
+                  <div class="pallet-grid-container" id="pallet-grid-container">
+                  
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="colour-slider">
-            <div class="puck-slider" id="puck-slider"></div>
-            <canvas id="colour-slider" width="358" height="10"></canvas>
-          </div>
-          <div class="color-codes">
-            <h4 id="color-code-hex">#ffffff</h4>
-            <h4 id="color-code-rgb">rgb(0, 0, 0)</h4>
-          </div>
-          <div class="colour-preview" id="colour-preview"></div>
         </div>
       </div>
     </div>
-  </div>
-  <script src="./scripts/index.js"></script>
-</body>
+    <script src="./scripts/index.js"></script>
+  </body>
 </html>
