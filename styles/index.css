@@ -44,6 +44,11 @@ h6 {
   border-bottom: 1px solid #5f5f5f;
 }
 
+.header {
+  display: flex;
+  gap: 5px;
+}
+
 .content-container {
   width: 100%;
   height: fit-content;
@@ -122,30 +127,35 @@ h6 {
 }
 
 .color-codes h4 {
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    justify-content: center;
-    align-items: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  transition: 300ms;
+  padding: 5px;
+  -webkit-animation: fade-in 500ms;
 }
 
-
-
 .color-codes h4::before {
-    content: "Copied";
-    white-space: nowrap;
-    position: absolute;
-    bottom: 22px;
-    background-color: #04c45e;
-    padding: 5px;
-    border-radius: 5px;
-    cursor: default;
-    display: none;
+  content: "Click to copy to clipboard";
+  white-space: nowrap;
+  position: absolute;
+  top: 24px;
+  background-color: #0ee63b;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: default;
+  display: none;
+}
+
+.color-codes h4:hover::before {
+  display: block;
 }
 
 .color-codes h4:active::before {
-    display: block;
+  background-color: #0fad30;
 }
 
 .color-picker-container button {
