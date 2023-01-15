@@ -295,8 +295,12 @@ collapseIcon.addEventListener("click", (e) => {
   if (collapsed) {
     palletMain.style.display = "block";
     collapsed = !collapsed;
+    const status = document.getElementById("status");
+    status.src = "close-icon.png";
   } else {
     palletMain.style.display = "none";
     collapsed = !collapsed;
+    const status = document.getElementById("status");
+    status.src = "menu-icon.png";
   }
 });
