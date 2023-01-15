@@ -48,6 +48,12 @@ h6 {
 .header {
   display: flex;
   gap: 5px;
+  align-items: center;
+}
+
+.header img {
+  width: 20px;
+  height: 20px;
 }
 
 .content-container {
@@ -163,15 +169,11 @@ h6 {
   height: 100%;
   border-radius: 3px;
   border-color: transparent;
-  background-color: #04c45e;
-  color: #dfd3d3;
+  background-color: #00b13b;
+  color: white;
   transition: 300ms;
 }
 
-.color-picker-container button:hover {
-  background-color: transparent;
-  background-color: #04c45e8a;
-}
 
 .pallet-main-container {
   width: 100%;
@@ -211,24 +213,52 @@ h6 {
 }
 
 .pallet {
-  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 3px;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 5px;
 }
 
-.pallet h6 {
+.pallet-container {
+  margin-top: 10px;
+}
+
+.pallet-container-pellet {
+  width: 100%;
+  height: fit-content;
+  border-radius: 2px;
   background-color: rgba(0, 0, 0, 0.404);
+  align-items: center;
+  margin: 0px;
   padding: 5px;
-  border-radius: 5px;
+}
+
+.pallet-container-pellet h6 {
   font-size: small;
+}
+
+.pallet-container-pellet button {
+  padding: 0;
+  margin: 0;
+  color: white;
+  cursor: pointer;
+  background-color: transparent;
+  border: transparent;
+}
+
+.pallet-container-pellet button img:hover {
+  transform: scale(1.1);
+  transition: 500ms;
 }
 
 .collapse {
   display: none;
 }
 
-.pallet-container {
-  margin-top: 10px;
+.delBtn {
+  cursor: pointer;
+  border: transparent;
+
 }
+

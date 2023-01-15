@@ -17,24 +17,89 @@ let sliderCtx = colorSlider.getContext("2d", { willReadFrequently: true });
 // Saved pallets
 // localStorage.removeItem("savedCol")
 let savedCol = localStorage.getItem("savedCol");
-console.log(savedCol);
+
+const checkAddBtnStatus = () => {
+  let palletEle = localStorage.getItem("savedCol");
+  let parsedPalletEle = JSON.parse(palletEle);
+  if (parsedPalletEle.length == 9) {
+    saveColourBtn.style.backgroundColor = "#04c45e8a";
+    saveColourBtn.style.color = "#c7d1d1";
+    saveColourBtn.style.cursor = "not-allowed";
+  } else {
+    saveColourBtn.style.backgroundColor = "#00b13b";
+    saveColourBtn.style.cursor = "pointer";
+    saveColourBtn.style.color = "#ffffff";
+  }
+};
+
+const checkEmptySaved = () => {
+  let palletEle = localStorage.getItem("savedCol");
+    let parsedPalletEle = JSON.parse(palletEle);
+    if (parsedPalletEle.length == 0) {
+      localStorage.setItem("savedCol", "[]");
+      const palletContainer = document.getElementById("pallet-container");
+      const messageContainer = document.createElement("message-container");
+      const message = document.createElement("h2");
+      messageContainer.id = "message";
+      message.innerText += "You have no saved colours";
+      message.style.color = "#9da1a1";
+      messageContainer.appendChild(message);
+      palletContainer.appendChild(messageContainer);
+    } else {
+      const message = document.getElementById("message");
+      if (message) {
+        message.remove();
+      }
+    }
+}
 
 const addPellet = () => {
   if (!savedCol) {
     localStorage.setItem("savedCol", "[]");
   } else {
-    console.log("FULL");
     let palletEle = localStorage.getItem("savedCol");
     let parsedPalletEle = JSON.parse(palletEle);
+    checkEmptySaved();
     parsedPalletEle.map((ele) => {
-      console.log(ele);
       const pellet = document.createElement("div");
       pellet.classList.add("pallet");
       pellet.style.backgroundColor = ele;
+      const container = document.createElement("div");
+      container.classList.add("pallet-container-pellet");
       const codeText = document.createElement("h6");
+      const delBtn = document.createElement("button");
+      const delIcon = document.createElement("img");
+      delIcon.src = "delete-icon.png";
+      delIcon.width = "20";
+      delIcon.height = "20";
+      delIcon.style.color = "#fd0000";
+      delIcon.id = "delBtn";
+      delBtn.appendChild(delIcon);
+      delBtn.style.display = "inline-block";
+      delBtn.style.verticalAlign = "middle";
+      delBtn.style.marginLeft = "5px";
       codeText.textContent += ele;
-      pellet.appendChild(codeText);
+      codeText.style.display = "inline-block";
+      codeText.style.verticalAlign = "middle";
+      codeText.style.marginLeft = "5px";
+      container.appendChild(delBtn);
+      container.appendChild(codeText);
+      pellet.appendChild(container);
       document.getElementById("pallet-grid-container").appendChild(pellet);
+      delBtn.addEventListener("click", (e) => {
+        let palletEle = localStorage.getItem("savedCol");
+        let parsedPalletEle = JSON.parse(palletEle);
+        const index = parsedPalletEle.indexOf(delBtn.parentElement.innerText);
+        if (index > -1) {
+          parsedPalletEle.splice(index, 1);
+        }
+        localStorage.setItem("savedCol", JSON.stringify(parsedPalletEle));
+        console.log(delBtn.parentElement.innerText);
+        delBtn.parentElement.parentElement.remove();
+        checkEmptySaved();
+        checkAddBtnStatus();
+      });
+      checkAddBtnStatus();
     });
   }
 };
@@ -42,15 +107,6 @@ const addPellet = () => {
 addPellet();
 
 // Save colour button
-
-const checkAddBtnStatus = () => {
-  let palletEle = localStorage.getItem("savedCol");
-  let parsedPalletEle = JSON.parse(palletEle);
-  if (parsedPalletEle.length == 9) {
-    saveColourBtn.style.backgroundColor = "#04c45e8a";
-    saveColourBtn.style.cursor = "default";
-  }
-};
 
 checkAddBtnStatus();
 
@@ -60,13 +116,45 @@ saveColourBtn.addEventListener("click", () => {
   if (parsedPalletEle.length < 9) {
     parsedPalletEle.push(colorCodeHex.innerText);
     localStorage.setItem("savedCol", JSON.stringify(parsedPalletEle));
+    checkEmptySaved()
     const pellet = document.createElement("div");
     pellet.classList.add("pallet");
     pellet.style.backgroundColor = colorCodeHex.innerText;
+    const container = document.createElement("div");
+    container.classList.add("pallet-container-pellet");
     const codeText = document.createElement("h6");
+    const delBtn = document.createElement("button");
+    const delIcon = document.createElement("img");
+    delIcon.src = "delete-icon.png";
+    delIcon.width = "20";
+    delIcon.height = "20";
+    delIcon.style.color = "#fd0000";
+    delIcon.id = "delBtn";
+    delBtn.appendChild(delIcon);
+    delBtn.style.display = "inline-block";
+    delBtn.style.verticalAlign = "middle";
+    delBtn.style.marginLeft = "5px";
     codeText.textContent += colorCodeHex.innerText;
-    pellet.appendChild(codeText);
+    codeText.style.display = "inline-block";
+    codeText.style.verticalAlign = "middle";
+    codeText.style.marginLeft = "5px";
+    container.appendChild(delBtn);
+    container.appendChild(codeText);
+    pellet.appendChild(container);
     document.getElementById("pallet-grid-container").appendChild(pellet);
+    delBtn.addEventListener("click", (e) => {
+      let palletEle = localStorage.getItem("savedCol");
+      let parsedPalletEle = JSON.parse(palletEle);
+      const index = parsedPalletEle.indexOf(delBtn.parentElement.innerText);
+      if (index > -1) {
+        parsedPalletEle.splice(index, 1);
+      }
+      localStorage.setItem("savedCol", JSON.stringify(parsedPalletEle));
+      console.log(delBtn.parentElement.innerText);
+      delBtn.parentElement.parentElement.remove();
+      checkEmptySaved();
+      checkAddBtnStatus();
+    });
     checkAddBtnStatus();
   }
 });
@@ -81,7 +169,6 @@ colorCodeHex.addEventListener("copy", (e) => {
   e.preventDefault();
   if (e.clipboardData) {
     e.clipboardData.setData("text/plain", colorCodeHex.textContent);
-    console.log(e.clipboardData.getData("text"));
   }
 });
 
