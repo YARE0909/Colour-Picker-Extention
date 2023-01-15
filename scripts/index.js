@@ -69,7 +69,7 @@ const addPellet = () => {
       const codeText = document.createElement("h6");
       const delBtn = document.createElement("button");
       const delIcon = document.createElement("img");
-      delIcon.src = "delete-icon.png";
+      delIcon.src = "./icons/delete-icon.png";
       delIcon.width = "20";
       delIcon.height = "20";
       delIcon.style.color = "#fd0000";
@@ -125,7 +125,7 @@ saveColourBtn.addEventListener("click", () => {
     const codeText = document.createElement("h6");
     const delBtn = document.createElement("button");
     const delIcon = document.createElement("img");
-    delIcon.src = "delete-icon.png";
+    delIcon.src = "./icons/delete-icon.png";
     delIcon.width = "20";
     delIcon.height = "20";
     delIcon.style.color = "#fd0000";
@@ -296,11 +296,11 @@ collapseIcon.addEventListener("click", (e) => {
     palletMain.style.display = "block";
     collapsed = !collapsed;
     const status = document.getElementById("status");
-    status.src = "close-icon.png";
+    status.src = "./icons/close-icon.png";
   } else {
     palletMain.style.display = "none";
     collapsed = !collapsed;
     const status = document.getElementById("status");
-    status.src = "menu-icon.png";
+    status.src = "./icons/menu-icon.png";
   }
 });
