@@ -1,0 +1,155 @@
+{
+  "main": {
+    "id": "396b64649430c92f",
+    "type": "split",
+    "children": [
+      {
+        "id": "eb2e7a74b0ecdb77",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ec6f8c6ae1312ffa",
+            "type": "leaf",
+            "state": {
+              "type": "kanban",
+              "state": {
+                "file": "notes/Project Manager.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c6a682538e0d12bc",
+    "type": "split",
+    "children": [
+      {
+        "id": "57de9568b61a1b8e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b565ea182a00f4fd",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "e8525251c085fd78",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "008af13bb2ae61f8",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "b65950172e9b8abd",
+    "type": "split",
+    "children": [
+      {
+        "id": "803c9642c45b8b81",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f51bf8a80a908405",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "notes/Project Manager.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "87c54646eba0499e",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "notes/Project Manager.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "7c9e33f38110be48",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "f746a98db0550c31",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "notes/Project Manager.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "templater-obsidian:Templater": false
+    }
+  },
+  "active": "ec6f8c6ae1312ffa",
+  "lastOpenFiles": [
+    "Colour code converter.md",
+    "notes/Project Manager.md",
+    "README.md",
+    "Project Manager/Project Manager.md"
+  ]
+}
