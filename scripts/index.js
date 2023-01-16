@@ -10,6 +10,8 @@ let puck = document.getElementById("puck");
 let puckSlider = document.getElementById("puck-slider");
 let palletMain = document.getElementById("collapse");
 let collapseIcon = document.getElementById("collapse-icon");
+let collapseSaved = document.getElementById("collapse-saved");
+let collapseSavedBtn = document.getElementById("collapse-saved-btn");
 
 let colorSlider = document.getElementById("colour-slider");
 let sliderCtx = colorSlider.getContext("2d", { willReadFrequently: true });
@@ -34,24 +36,24 @@ const checkAddBtnStatus = () => {
 
 const checkEmptySaved = () => {
   let palletEle = localStorage.getItem("savedCol");
-    let parsedPalletEle = JSON.parse(palletEle);
-    if (parsedPalletEle.length == 0) {
-      localStorage.setItem("savedCol", "[]");
-      const palletContainer = document.getElementById("pallet-container");
-      const messageContainer = document.createElement("message-container");
-      const message = document.createElement("h2");
-      messageContainer.id = "message";
-      message.innerText += "You have no saved colours";
-      message.style.color = "#9da1a1";
-      messageContainer.appendChild(message);
-      palletContainer.appendChild(messageContainer);
-    } else {
-      const message = document.getElementById("message");
-      if (message) {
-        message.remove();
-      }
+  let parsedPalletEle = JSON.parse(palletEle);
+  if (parsedPalletEle.length == 0) {
+    localStorage.setItem("savedCol", "[]");
+    const palletContainer = document.getElementById("pallet-container");
+    const messageContainer = document.createElement("message-container");
+    const message = document.createElement("h2");
+    messageContainer.id = "message";
+    message.innerText += "You have no saved colours";
+    message.style.color = "#9da1a1";
+    messageContainer.appendChild(message);
+    palletContainer.appendChild(messageContainer);
+  } else {
+    const message = document.getElementById("message");
+    if (message) {
+      message.remove();
     }
-}
+  }
+};
 
 const addPellet = () => {
   if (!savedCol) {
@@ -116,7 +118,7 @@ saveColourBtn.addEventListener("click", () => {
   if (parsedPalletEle.length < 9) {
     parsedPalletEle.push(colorCodeHex.innerText);
     localStorage.setItem("savedCol", JSON.stringify(parsedPalletEle));
-    checkEmptySaved()
+    checkEmptySaved();
     const pellet = document.createElement("div");
     pellet.classList.add("pallet");
     pellet.style.backgroundColor = colorCodeHex.innerText;
@@ -290,6 +292,7 @@ colourDropperBtn.addEventListener("click", () => {
 });
 
 let collapsed = true;
+let collapsedSavedVar = true;
 
 collapseIcon.addEventListener("click", (e) => {
   if (collapsed) {
@@ -302,5 +305,15 @@ collapseIcon.addEventListener("click", (e) => {
     collapsed = !collapsed;
     const status = document.getElementById("status");
     status.src = "./icons/menu-icon.png";
+  }
+});
+
+collapseSavedBtn.addEventListener("click", (e) => {
+  if (collapsedSavedVar) {
+    collapseSaved.style.display = "block";
+    collapsedSavedVar = !collapsedSavedVar;
+  } else {
+    collapseSaved.style.display = "none";
+    collapsedSavedVar = !collapsedSavedVar;
   }
 });
